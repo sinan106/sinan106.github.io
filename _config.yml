@@ -3,9 +3,9 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Sinan-blog
+title: Sinan
 subtitle: ''
-description: ''
+description: '玲珑骰子安红豆'
 keywords:
 author: Sinan
 language: zh-CN
@@ -106,3 +106,7 @@ deploy:
   type: git
   repo: https://github.com/sinan106/sinan106.github.io.git
   branch: master
+
+search:
+  path: search.xml
+  field: post

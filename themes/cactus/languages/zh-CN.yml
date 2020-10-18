@@ -6,12 +6,13 @@ nav:
   tag: 标签
   category: 分类
   search: 搜索
+  friends: 友链
 
 footer:
   copyright: Copyright
 
 index:
-  find_me_on: 在这里找到我：
+  find_me_on: 找到我：
   enum_comma: ' '
   enum_and: ' '
   articles: 文章
