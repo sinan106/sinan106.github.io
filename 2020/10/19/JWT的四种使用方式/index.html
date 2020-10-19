@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="基本思路 access_token 过期设置为15分钟 前端发起请求，后端验证access_token是否过期；如果过期，前端发起refresh_token请求，后端设置已再次授权标记为true，请求成功 前端发起请求，后端验证再次授权标记，如果已经再次授权，则拒绝refresh_token的请求，请求成功 如果前端每隔72小时，必须重新登录，后端检查用户最后一次登录日期，如超过72小时，则拒绝刷">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JWT的四种使用方式">
+<meta property="og:url" content="http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/index.html">
+<meta property="og:site_name" content="Sinan">
+<meta property="og:description" content="基本思路 access_token 过期设置为15分钟 前端发起请求，后端验证access_token是否过期；如果过期，前端发起refresh_token请求，后端设置已再次授权标记为true，请求成功 前端发起请求，后端验证再次授权标记，如果已经再次授权，则拒绝refresh_token的请求，请求成功 如果前端每隔72小时，必须重新登录，后端检查用户最后一次登录日期，如超过72小时，则拒绝刷">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-19T12:36:39.000Z">
+<meta property="article:modified_time" content="2020-10-19T13:07:24.183Z">
+<meta property="article:author" content="Sinan">
+<meta property="article:tag" content="JWT">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>JWT的四种使用方式</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/10/19/idea%E5%88%9B%E5%BB%BA-maven-tomcat%E9%A1%B9%E7%9B%AE/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&text=JWT的四种使用方式"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&is_video=false&description=JWT的四种使用方式"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JWT的四种使用方式&body=Check out this article: http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&name=JWT的四种使用方式&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&t=JWT的四种使用方式"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">1.0实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">2.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">2.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">3.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">4.0.1.</span> <span class="toc-text">3.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">4.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">5.0.1.</span> <span class="toc-text">4.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.</span> <span class="toc-text">最终实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF"><span class="toc-number">7.</span> <span class="toc-text">后端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%EF%BC%88VUE%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">前端（VUE）</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        JWT的四种使用方式
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Sinan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-19T12:36:39.000Z" itemprop="datePublished">2020-10-19</time>
+        
+        (Updated: <time datetime="2020-10-19T13:07:24.183Z" itemprop="dateModified">2020-10-19</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/java/">java</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/JWT/" rel="tag">JWT</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h1><ol>
+<li>access_token 过期设置为15分钟</li>
+<li>前端发起请求，后端验证access_token是否过期；如果过期，前端发起refresh_token请求，后端设置已再次授权标记为true，请求成功</li>
+<li>前端发起请求，后端验证再次授权标记，如果已经再次授权，则拒绝refresh_token的请求，请求成功</li>
+<li>如果前端每隔72小时，必须重新登录，后端检查用户最后一次登录日期，如超过72小时，则拒绝刷新token的请求，请求失败</li>
+</ol>
+<h1 id="1-0实现"><a href="#1-0实现" class="headerlink" title="1.0实现"></a>1.0实现</h1><ol>
+<li><p>登录成功，返回access_token和refresh_token，客户端缓存此两种token;</p>
+</li>
+<li><p>使用access_token请求接口资源，成功则调用成功；如果token超时，客户端携带refresh_token调用中间件接口获取新的access_token;</p>
+</li>
+<li><p>中间件接受refresh_token的请求后，检查refresh_token是否过期。<br>如过期，拒绝刷新，客户端收到该状态后，跳转到登录页；<br>如未过期，生成新的access_token和refresh_token并返回给客户端（如有可能，让旧的refresh_token失效），客户端携带新的access_token重新调用上面的资源接口。</p>
+</li>
+<li><p>客户端退出登录或修改密码后，调用中间件注销旧的token(使access_token和refresh_token失效)，同时清空客户端的access_token和refresh_toke。</p>
+<p> 后端表<br> id user_id client_id client_secret refresh_token expire_in create_date del_flag</p>
+</li>
+</ol>
+<h1 id="2-0实现"><a href="#2-0实现" class="headerlink" title="2.0实现"></a>2.0实现</h1><p>场景： access_token访问资源 refresh_token授权访问 设置固定时间X必须重新登录</p>
+<ol>
+<li>登录成功，后台jwt生成access_token（jwt有效期30分钟）和refresh_token（jwt有效期15天），并缓存到redis（hash-key为token,sub-key为手机号,value为设备唯一编号（根据手机号码，可以人工废除全部token，也可以根据sub-key,废除部分设备的token。），设置过期时间为1个月(redis)，保证最终所有token都能删除)，返回后，客户端缓存此两种token;</li>
+<li>使用access_token请求接口资源，校验成功且redis中存在该access_token（未废除）则调用成功；如果token超时，中间件删除access_token（废除）；客户端再次携带refresh_token调用中间件接口获取新的access_token;</li>
+<li>中间件接受刷新token的请求后，检查refresh_token是否过期。<br> 如过期，拒绝刷新，删除refresh_token（废除）； 客户端收到该状态后，跳转到登录页；<br> 如未过期，检查缓存中是否有refresh_token（是否被废除），如果有，则生成新的access_token并返回给客户端，客户端接着携带新的access_token重新调用上面的资源接口。</li>
+<li>客户端退出登录或修改密码后，调用中间件注销旧的token(中间件删除access_token、refresh_token（废除）)，同时清空客户端侧的access_token和refresh_toke。</li>
+<li>如手机丢失，可以根据手机号人工废除指定用户设备关联的token。</li>
+<li>以上3刷新access_token可以增加根据登录时间判断最长X时间必须重新登录，此时则拒绝刷新token。（拒绝的场景：失效，长时间未登录，频繁刷新）</li>
+</ol>
+<h3 id="2-0-变动"><a href="#2-0-变动" class="headerlink" title="2.0 变动"></a>2.0 变动</h3><p>1.登录<br>2.登录拦截器<br>3.增加刷新access_token接口<br>4.退出登录<br>5.修改密码</p>
+<h1 id="3-0实现"><a href="#3-0实现" class="headerlink" title="3.0实现"></a>3.0实现</h1><p>场景：自动续期 长时间未使用需重新登录</p>
+<ol>
+<li>登录成功，后台jwt生成access_token（jwt有效期30分钟），并缓存到redis（hash-key为access_token,sub-key为手机号,value为设备唯一编号（根据手机号码，可以人工废除全部token），设置access_token过期时间为7天，保证最终所有token都能删除)，返回后，客户端缓存此token;</li>
+<li>使用access_token请求接口资源，校验成功且redis中存在该access_token（未废除）则调用成功；如果token超时，中间件删除access_token（废除）,同时生成新的access_token并返回。客户端收到新的access_token，<br>再次请求接口资源。</li>
+<li>客户端退出登录或修改密码后，调用中间件注销旧的token(中间件删除access_token（废除）)，同时清空客户端侧的access_token。</li>
+<li>以上2 可以增加根据登录时间判断最长X时间必须重新登录，此时则拒绝刷新token。（拒绝的场景：长时间未登录，频繁刷新）</li>
+<li>如手机丢失，可以根据手机号人工废除指定用户设备关联的token。</li>
+</ol>
+<h3 id="3-0-变动"><a href="#3-0-变动" class="headerlink" title="3.0 变动"></a>3.0 变动</h3><p>1.登录<br>2.登录拦截器<br>3.退出登录<br>4.修改密码</p>
+<h1 id="4-0实现"><a href="#4-0实现" class="headerlink" title="4.0实现"></a>4.0实现</h1><p>场景：token过期重新登录 长时间未使用需重新登录</p>
+<p>1.登录成功，后台jwt生成access_token（jwt有效期7天），并缓存到redis，key为”user_id:access_token” + 用户id,value为access_token（根据用户id，可以人工废除指定用户全部<br>token），设置缓存过期时间为7天，保证最终所有token都能删除，请求返回后，客户端缓存此access_token；<br>2.使用access_token请求接口资源，校验成功且redis中存在该access_token（未废除）则调用成功；如果token超时，中间件删除access_token（废除）,同时生成新的access_token并返回。客户端收到新的access_token，再次请求接口资源。<br>3.客户端退出登录或修改密码后，调用中间件注销旧的token(中间件删除access_token（废除）)，同时清空客户端侧的access_token。<br>4.以上2 可以增加根据登录时间判断最长X时间必须重新登录，此时则拒绝刷新token。（拒绝的场景：长时间未登录，频繁刷新）<br>5.如手机丢失，可以根据手机号人工废除指定用户设备关联的token。</p>
+<h3 id="4-0-变动"><a href="#4-0-变动" class="headerlink" title="4.0 变动"></a>4.0 变动</h3><p>1.登录<br>2.登录拦截器<br>3.退出登录<br>4.修改密码</p>
+<h1 id="最终实现"><a href="#最终实现" class="headerlink" title="最终实现"></a>最终实现</h1><h1 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h1><ol>
+<li>在登录接口中 如果校验账号密码成功 则根据用户id和用户类型创建jwt token(有效期设置为-1，即永不过期),得到A</li>
+<li>更新登录日期(当前时间new Date()即可)（业务上可选），得到B</li>
+<li>在redis中缓存key为ACCESS_TOKEN:userId:A(加上A是为了防止用户多个客户端登录 造成token覆盖),value为B的毫秒数（转换成字符串类型），过期时间为7天（7 * 24 * 60 * 60）</li>
+<li>在登录结果中返回json格式为{“result”:”success”,”token”: A}</li>
+<li>用户在接口请求header中携带token进行登录，后端在所有接口前置拦截器进行拦截，作用是解析token 拿到userId和用户类型（用户调用业务接口只需要传token即可）， 如果解析失败（抛出SignatureException），则返回json（code = 0 ,info= Token验证不通过, errorCode = ‘1001’）； 此外如果解析成功，验证redis中key为ACCESS_TOKEN:userId:A 是否存在 如果不存在 则返回json（code = 0 ,info= 会话过期请重新登录, errorCode = ‘1002’）； 如果缓存key存在，则自动续7天超时时间（value不变），实现频繁登录用户免登陆。</li>
+<li>把userId和用户类型放入request参数中 接口方法中可以直接拿到登录用户信息</li>
+<li>如果是修改密码或退出登录 则废除access_tokens（删除key）</li>
+</ol>
+<h1 id="前端（VUE）"><a href="#前端（VUE）" class="headerlink" title="前端（VUE）"></a>前端（VUE）</h1><ol>
+<li>用户登录成功，则把username存入cookie中，key为loginUser;把token存入cookie中，key为accessToken 把token存入Vuex全局状态中</li>
+<li>进入首页</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%80%9D%E8%B7%AF"><span class="toc-number">1.</span> <span class="toc-text">基本思路</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#1-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">2.</span> <span class="toc-text">1.0实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">3.</span> <span class="toc-text">2.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">3.0.1.</span> <span class="toc-text">2.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">4.</span> <span class="toc-text">3.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">4.0.1.</span> <span class="toc-text">3.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#4-0%E5%AE%9E%E7%8E%B0"><span class="toc-number">5.</span> <span class="toc-text">4.0实现</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-0-%E5%8F%98%E5%8A%A8"><span class="toc-number">5.0.1.</span> <span class="toc-text">4.0 变动</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%9C%80%E7%BB%88%E5%AE%9E%E7%8E%B0"><span class="toc-number">6.</span> <span class="toc-text">最终实现</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%90%8E%E7%AB%AF"><span class="toc-number">7.</span> <span class="toc-text">后端</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%89%8D%E7%AB%AF%EF%BC%88VUE%EF%BC%89"><span class="toc-number">8.</span> <span class="toc-text">前端（VUE）</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&text=JWT的四种使用方式"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&is_video=false&description=JWT的四种使用方式"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=JWT的四种使用方式&body=Check out this article: http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&title=JWT的四种使用方式"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&name=JWT的四种使用方式&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/&t=JWT的四种使用方式"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Sinan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+        <li><a href="/">首页</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/tags/">标签</a></li>
+        
+        <li><a href="/categories/">分类</a></li>
+        
+        <li><a href="/search/">搜索</a></li>
+        
+        <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+
+
+</footer>
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
