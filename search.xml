@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>第六章 结构化开发</title>
+      <link href="2020/10/19/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%80%E5%8F%91/"/>
+      <url>2020/10/19/%E7%AC%AC%E5%85%AD%E7%AB%A0-%E7%BB%93%E6%9E%84%E5%8C%96%E5%BC%80%E5%8F%91/</url>
+      
+        <content type="html"><![CDATA[<h1 id="6-1-结构化开发"><a href="#6-1-结构化开发" class="headerlink" title="6. 1 结构化开发"></a>6. 1 结构化开发</h1><h3 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h3><blockquote><ol><li>指导思想是自顶向下、逐层分解</li><li>基本原则是功能的分解与抽象</li><li>适合于数据处理领域的问题，但是不适合解决大规模、特别复杂的项目，难以适应需求的变化</li></ol></blockquote><h3 id="2-系统设计的基本原理"><a href="#2-系统设计的基本原理" class="headerlink" title="2.系统设计的基本原理"></a>2.系统设计的基本原理</h3><h5 id="1-抽象"><a href="#1-抽象" class="headerlink" title="1. 抽象"></a>1. 抽象</h5><h5 id="2-模块化"><a href="#2-模块化" class="headerlink" title="2. 模块化"></a>2. 模块化</h5><h5 id="3-信息屏蔽"><a href="#3-信息屏蔽" class="headerlink" title="3. 信息屏蔽"></a>3. 信息屏蔽</h5><h5 id="4-模块独立-衡量模块独立程度的标准：耦合性和内聚性"><a href="#4-模块独立-衡量模块独立程度的标准：耦合性和内聚性" class="headerlink" title="4. 模块独立 : 衡量模块独立程度的标准：耦合性和内聚性"></a>4. 模块独立 : 衡量模块独立程度的标准：耦合性和内聚性</h5><ol><li><p>耦合</p><blockquote><p>模块间相对独立性的度量</p></blockquote><ol><li>无直接耦合：没有任何关系</li><li>数据耦合：两模块间传递简单的数据值 / 值传递</li><li>标记耦合：传递数据结构</li><li>控制耦合：一个模块调用另一个时传递变量，被调模块通过变量值不同来决定执行那个功能。被调模块通常有多个功能</li><li>外部耦合：通过软件之外的环境联结，<strong>如通过IO设备耦合到特定设备、格式、通信协议</strong></li><li>公共耦合：通过一个公共数据环境相互作用，<strong>如全局的变量或数据结构</strong></li><li>内容耦合：一个模块直接使用另一个模块的内部数据，或通过非正常入口进入另一个模块</li></ol></li><li><p>内聚</p><blockquote><p>一个模块内部各个元素结合的繁密程度</p></blockquote><ol><li>偶然/巧合内聚：一个模块内各元素都没有任何联系</li><li>逻辑内聚：模块内执行若干逻辑上相似的功能，通过参数确定该模块完成哪一个功能</li><li>时间内聚：同时执行的动作组合在一起，<strong>如系统初始化</strong></li><li>过程内聚：一个模块完成多个任务，这些任务必须按照指定的顺序进行</li><li>通信内聚：模块内的所有处理元素都在一个数据结构上操作，或者处理使用相同的输入数据或者产生相同的输出数据，<strong>如向某个数据结构读/写数据</strong></li><li>顺序内聚：模块中的任务必须顺序执行，且前一个的输出就是下一个的输入</li><li>功能内聚：模块内的所有元素共同完成一个功能，缺一不可</li></ol><p> <strong>Tip：顺序内聚强调数据间的传递，然而过程内聚不强调</strong></p></li></ol><h3 id="3-扇入系数与扇出系数"><a href="#3-扇入系数与扇出系数" class="headerlink" title="3. 扇入系数与扇出系数"></a>3. 扇入系数与扇出系数</h3><blockquote><p>一个模块直接调用其他模块的个数称为模块的扇出系数，反之，被调用的次数被称为扇入系数。</p><p>一般扇入和扇出系数为3，4，不会超过7</p></blockquote><h1 id="6-2-数据流图"><a href="#6-2-数据流图" class="headerlink" title="6.2 数据流图"></a>6.2 数据流图</h1><blockquote><p>数据流图也称为数据流程图(Data Flow Diagram DFD)</p></blockquote><h4 id="基本元素："><a href="#基本元素：" class="headerlink" title="基本元素："></a>基本元素：</h4><ul><li>数据流<img src="http://cdn.zhouxug.cn/20201019194428.png" alt="image-20201019194428595" style="zoom:50%;" /></li></ul><ul><li>加工<img src="http://cdn.zhouxug.cn/20201019194349.png" alt="image-20201019194349384" style="zoom:50%;" /></li></ul><ul><li>数据存储<img src="http://cdn.zhouxug.cn/20201019194404.png" alt="image-20201019194404865" style="zoom:50%;" /></li></ul><ul><li>外部实体<img src="http://cdn.zhouxug.cn/20201019194327.png" alt="image-20201019194327089" style="zoom:50%;" /></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 软考 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 软件工程 </tag>
+            
+            <tag> 结构化 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Mybatis-plus_hello</title>
       <link href="2020/10/18/Mybatis-plus_hello/"/>
       <url>2020/10/18/Mybatis-plus_hello/</url>
