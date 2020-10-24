@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="7.1 面向对象基础1. 基本概念 面向对象 &#x3D; 对象 + 分类 + 继承 + 通过消息的通信   对象：最基本的运行时实体，包含数据和行为 消息：对象之间的通信的一种构造叫消息 类：大体相似的对象 继承 多态  2. 对象、消息传递和方法 对象是类的实体，尽管对象的表示在形式上与一般数据类型相似，但是它们之间的本质区别，对象之间通过消息传递方式进行通信  7.2 UML7.3 设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第七章 面向对象技术">
+<meta property="og:url" content="http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/index.html">
+<meta property="og:site_name" content="Sinan">
+<meta property="og:description" content="7.1 面向对象基础1. 基本概念 面向对象 &#x3D; 对象 + 分类 + 继承 + 通过消息的通信   对象：最基本的运行时实体，包含数据和行为 消息：对象之间的通信的一种构造叫消息 类：大体相似的对象 继承 多态  2. 对象、消息传递和方法 对象是类的实体，尽管对象的表示在形式上与一般数据类型相似，但是它们之间的本质区别，对象之间通过消息传递方式进行通信  7.2 UML7.3 设计模式">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2020-10-24T11:43:57.000Z">
+<meta property="article:modified_time" content="2020-10-24T13:34:21.168Z">
+<meta property="article:author" content="Sinan">
+<meta property="article:tag" content="软件工程">
+<meta property="article:tag" content="面向对象">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>第七章 面向对象技术</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/2020/10/24/UML/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" href="/2020/10/19/JWT%E7%9A%84%E5%9B%9B%E7%A7%8D%E4%BD%BF%E7%94%A8%E6%96%B9%E5%BC%8F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&text=第七章 面向对象技术"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&is_video=false&description=第七章 面向对象技术"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=第七章 面向对象技术&body=Check out this article: http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&name=第七章 面向对象技术&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&t=第七章 面向对象技术"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#7-1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">7.1 面向对象基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E8%B1%A1%E3%80%81%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 对象、消息传递和方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-2-UML"><span class="toc-number">2.</span> <span class="toc-text">7.2 UML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-3-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">7.3 设计模式</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        第七章 面向对象技术
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Sinan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-10-24T11:43:57.000Z" itemprop="datePublished">2020-10-24</time>
+        
+        (Updated: <time datetime="2020-10-24T13:34:21.168Z" itemprop="dateModified">2020-10-24</time>)
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fas fa-archive"></i>
+        <a class="category-link" href="/categories/%E8%BD%AF%E8%80%83/">软考</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/%E8%BD%AF%E4%BB%B6%E5%B7%A5%E7%A8%8B/" rel="tag">软件工程</a>, <a class="tag-link-link" href="/tags/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" rel="tag">面向对象</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="7-1-面向对象基础"><a href="#7-1-面向对象基础" class="headerlink" title="7.1 面向对象基础"></a>7.1 面向对象基础</h1><h3 id="1-基本概念"><a href="#1-基本概念" class="headerlink" title="1. 基本概念"></a>1. 基本概念</h3><blockquote>
+<p>面向对象 = 对象 + 分类 + 继承 + 通过消息的通信</p>
+</blockquote>
+<ol>
+<li>对象：最基本的运行时实体，包含数据和行为</li>
+<li>消息：对象之间的通信的一种<strong>构造</strong>叫消息</li>
+<li>类：大体相似的对象</li>
+<li>继承</li>
+<li>多态</li>
+</ol>
+<h3 id="2-对象、消息传递和方法"><a href="#2-对象、消息传递和方法" class="headerlink" title="2. 对象、消息传递和方法"></a>2. 对象、消息传递和方法</h3><blockquote>
+<p>对象是类的实体，尽管对象的表示在形式上与一般数据类型相似，但是它们之间的本质区别，<strong>对象之间通过消息传递方式进行通信</strong></p>
+</blockquote>
+<h1 id="7-2-UML"><a href="#7-2-UML" class="headerlink" title="7.2 UML"></a><a target="_blank" rel="noopener" href="https://sinan106.github.io/2020/10/24/UML/">7.2 UML</a></h1><h1 id="7-3-设计模式"><a href="#7-3-设计模式" class="headerlink" title="7.3 设计模式"></a><a target="_blank" rel="noopener" href="https://sinan106.github.io/2020/10/24/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">7.3 设计模式</a></h1>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#7-1-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80"><span class="toc-number">1.</span> <span class="toc-text">7.1 面向对象基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. 基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E8%B1%A1%E3%80%81%E6%B6%88%E6%81%AF%E4%BC%A0%E9%80%92%E5%92%8C%E6%96%B9%E6%B3%95"><span class="toc-number">1.0.2.</span> <span class="toc-text">2. 对象、消息传递和方法</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-2-UML"><span class="toc-number">2.</span> <span class="toc-text">7.2 UML</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#7-3-%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.</span> <span class="toc-text">7.3 设计模式</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&text=第七章 面向对象技术"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&is_video=false&description=第七章 面向对象技术"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=第七章 面向对象技术&body=Check out this article: http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&title=第七章 面向对象技术"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&name=第七章 面向对象技术&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/10/24/%E7%AC%AC%E4%B8%83%E7%AB%A0-%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E6%8A%80%E6%9C%AF/&t=第七章 面向对象技术"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Sinan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+        <li><a href="/">首页</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/tags/">标签</a></li>
+        
+        <li><a href="/categories/">分类</a></li>
+        
+        <li><a href="/search/">搜索</a></li>
+        
+        <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+
+
+</footer>
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
