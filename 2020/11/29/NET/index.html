@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="1. 选择判断1. HTML 常见块级元素和行内元素：  div：块级元素，没有特定含义，通常用于逻辑上的分块，会换行 ， span：行内元素，无特殊含义，可作为文本容器，不会换行 table：块级元素，是HTML表格，会换行 form：块级元素，会换行   ul、ol标签区别  ul是无序列表，使用list-style-type:none可以去掉实心圆  ol是有序列表，可以设置 start &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".NET">
+<meta property="og:url" content="http://example.com/2020/11/29/NET/index.html">
+<meta property="og:site_name" content="Sinan">
+<meta property="og:description" content="1. 选择判断1. HTML 常见块级元素和行内元素：  div：块级元素，没有特定含义，通常用于逻辑上的分块，会换行 ， span：行内元素，无特殊含义，可作为文本容器，不会换行 table：块级元素，是HTML表格，会换行 form：块级元素，会换行   ul、ol标签区别  ul是无序列表，使用list-style-type:none可以去掉实心圆  ol是有序列表，可以设置 start &#x3D;">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="c:/Users/zhoux/AppData/Roaming/Typora/typora-user-images/image-20201129110949676.png">
+<meta property="og:image" content="http://cdn.zhouxug.cn/20201129111459.png">
+<meta property="og:image" content="http://cdn.zhouxug.cn/20201129111512.png">
+<meta property="og:image" content="http://cdn.zhouxug.cn/20201129113148.png">
+<meta property="og:image" content="http://cdn.zhouxug.cn/20201129112040.png">
+<meta property="og:image" content="http://cdn.zhouxug.cn/20201129151930.png">
+<meta property="article:published_time" content="2020-11-29T03:01:28.000Z">
+<meta property="article:modified_time" content="2020-11-29T09:25:00.998Z">
+<meta property="article:author" content="Sinan">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content=".NET">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="c:/Users/zhoux/AppData/Roaming/Typora/typora-user-images/image-20201129110949676.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+          
+            <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+          
+        
+    
+    <!-- title -->
+    <title>.NET</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+      
+<link rel="stylesheet" href="/css/rtl.css">
+
+    
+    <!-- rss -->
+    
+    
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/2020/10/30/%E7%AC%AC%E5%9B%9B%E7%AB%A0-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/11/29/NET/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/11/29/NET/&text=.NET"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/11/29/NET/&is_video=false&description=.NET"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=.NET&body=Check out this article: http://example.com/2020/11/29/NET/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/11/29/NET/&name=.NET&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/11/29/NET/&t=.NET"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%80%89%E6%8B%A9%E5%88%A4%E6%96%AD"><span class="toc-number">1.</span> <span class="toc-text">1. 选择判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HTML"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. HTML</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-CSS"><span class="toc-number">2.</span> <span class="toc-text">2. CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 常用选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 常用属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">1. 背景属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%97%E4%BD%93%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">2. 字体属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%87%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">3. 文本属性</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        .NET
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Sinan</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2020-11-29T03:01:28.000Z" itemprop="datePublished">2020-11-29</time>
+        
+        (Updated: <time datetime="2020-11-29T09:25:00.998Z" itemprop="dateModified">2020-11-29</time>)
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/NET/" rel="tag">.NET</a>, <a class="tag-link-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h1 id="1-选择判断"><a href="#1-选择判断" class="headerlink" title="1. 选择判断"></a>1. 选择判断</h1><h3 id="1-HTML"><a href="#1-HTML" class="headerlink" title="1. HTML"></a>1. HTML</h3><ol>
+<li><p>常见块级元素和行内元素：</p>
+<ol>
+<li>div：块级元素，没有特定含义，通常用于逻辑上的分块，会换行 ，</li>
+<li>span：行内元素，无特殊含义，可作为文本容器，不会换行</li>
+<li>table：块级元素，是HTML表格，会换行<img src="C:\Users\zhoux\AppData\Roaming\Typora\typora-user-images\image-20201129110949676.png" alt="image-20201129110949676" style="zoom: 67%;" /></li>
+<li>form：块级元素，会换行</li>
+</ol>
+</li>
+<li><p>ul、ol标签区别</p>
+<ol>
+<li>ul是无序列表，使用list-style-type:none可以去掉实心圆 <img src="http://cdn.zhouxug.cn/20201129111459.png" alt="image-20201129111459633" style="zoom:67%;" /></li>
+<li>ol是有序列表，可以设置 start = “100” 是的序号从100开始 <img src="http://cdn.zhouxug.cn/20201129111512.png" alt="image-20201129111512154" style="zoom:67%;" /></li>
+<li>以上两者内部都是用li标签</li>
+</ol>
+</li>
+<li><p>video标签支持的格式：mp4,webm,ogg三种格式</p>
+</li>
+<li><p>input常用属性</p>
+<ol>
+<li>name：传值必须使用name，否则该数据不会被提交</li>
+<li>使用get方法会在url后以?连接请求串，多个值之间使用&amp;相连</li>
+<li>value：初始值</li>
+<li>title：悬浮提示</li>
+<li>autofocus：获得焦点</li>
+<li>placeholder：站位提示，输入会自动消失</li>
+<li>type：<ol>
+<li>text：单行文本框，搭配maxlength表示接收的最长字符</li>
+<li>password：密码</li>
+<li>checkbox：复选框，收到的内容为 name = value，<img src="http://cdn.zhouxug.cn/20201129113148.png" alt="image-20201129113148280" style="zoom:80%;" /></li>
+<li>hidden：隐藏域，有name值的隐藏域会和其value一起提交</li>
+<li>submit：提交</li>
+<li>reset：重填</li>
+</ol>
+</li>
+</ol>
+</li>
+<li><p>form表单</p>
+<ol>
+<li><p>概览</p>
+<img src="http://cdn.zhouxug.cn/20201129112040.png" alt="image-20201129112040621" style="zoom: 50%;" /></li>
+<li><p>target = “_blank” 是从新窗口打开页面，默认是 target = “_self”，从当前页面打开</p>
+</li>
+<li></li>
+</ol>
+</li>
+</ol>
+<h1 id="2-CSS"><a href="#2-CSS" class="headerlink" title="2. CSS"></a>2. CSS</h1><blockquote>
+<p>样式定义如何显示HTML元素，解决内容与表现分离的问题</p>
+</blockquote>
+<h3 id="1-常用选择器"><a href="#1-常用选择器" class="headerlink" title="1. 常用选择器"></a>1. 常用选择器</h3><ol>
+<li>通配符选择</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* &#123;</span><br><span class="line">    <span class="attribute">color </span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>标签选择器</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span>, <span class="selector-tag">input</span>&#123;</span><br><span class="line">    <span class="attribute">background-color </span>: silver;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>id选择器</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># <span class="selector-tag">id</span> &#123;</span><br><span class="line">    <span class="attribute">background-color </span>: red;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="4">
+<li>class选择器</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.class</span> &#123;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="5">
+<li>标签 class组合选择器</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div.class &#123;&#125; // 注意选择器之间没有空格</span><br></pre></td></tr></table></figure>
+
+<ol start="6">
+<li>后代选择器</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ul li a &#123;            //空格分隔选择器 可以跨代</span><br><span class="line">	color:red;		 //本例含义 ul后代的li后代的a标签字体为红色</span><br><span class="line">&#125; </span><br></pre></td></tr></table></figure>
+
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;nav&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#&quot;</span>&gt;</span>首页<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;menu&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.wust.edu.cn/&quot;</span>&gt;</span>武科大<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.hust.edu.cn/&quot;</span>&gt;</span>华科<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">li</span>&gt;</span> <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;http://www.whu.edu.cn/&quot;</span>&gt;</span>武大<span class="tag">&lt;/<span class="name">a</span>&gt;</span> <span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="7">
+<li>子选择器（<strong>直接儿子</strong>）</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div&gt;strong &#123;           // div 所有直接儿子为strong元素字体为红色 </span><br><span class="line">    <span class="selector-tag">color</span> : <span class="selector-tag">red</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ol start="8">
+<li>相邻兄弟选择器</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h3+p &#123;&#125;  // 选择紧跟在另一元素后的元素(第一个相邻的) ，二者有相同父元素</span><br></pre></td></tr></table></figure>
+
+<ol start="9">
+<li>同级兄弟选择器</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h3~p&#123;&#125;  // 选择同级的元素(后面相邻的兄弟)，二者有相同父元素</span><br></pre></td></tr></table></figure>
+
+<ol start="10">
+<li>伪类</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">// 1. a标签</span><br><span class="line">&lt;a href=&quot;http://www.wust.edu.cn&quot; target=&quot;_blank&quot;&gt;武科大&lt;/a&gt;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:link</span> &#123; <span class="comment">/* 未访问的链接 */</span></span><br><span class="line"><span class="attribute">color</span>: red;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:visited</span> &#123; <span class="comment">/* 已访问的链接 */</span></span><br><span class="line"><span class="attribute">color</span>: grey;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:hover</span> &#123; <span class="comment">/* 鼠标移动到链接上 */</span></span><br><span class="line"><span class="attribute">color</span>: purple;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-tag">a</span><span class="selector-pseudo">:active</span> &#123; <span class="comment">/* 选定的链接(鼠标按下时) */</span></span><br><span class="line"><span class="attribute">color</span>: blue;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// 2. focus</span><br><span class="line"><span class="selector-tag">input</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line"><span class="attribute">background-color</span>: yellow;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&lt;<span class="selector-tag">form</span>&gt;</span><br><span class="line">	用户名:&lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;</span><br><span class="line">	&lt;br /&gt;</span><br><span class="line">	密码: &lt;input type=&quot;text&quot; name=&quot;psd&quot; /&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line"></span><br><span class="line">// 3. first-child</span><br><span class="line">p:first-child &#123;    //作为第一个子元素的 p 元素</span><br><span class="line"><span class="selector-tag">color</span>: <span class="selector-tag">red</span>;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="selector-tag">body</span>&gt;</span><br><span class="line">	&lt;<span class="selector-tag">div</span>&gt;</span><br><span class="line">		&lt;p&gt;第一段&lt;/p&gt; // 变红</span><br><span class="line">		&lt;p&gt;第二段&lt;/p&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line"></span><br><span class="line">// 4. before在元素之前插入新内容</span><br><span class="line">h1:before &#123;  //含义：在 h1 元素之前添加内容</span><br><span class="line">content: url(&quot;images/1.gif&quot;);</span><br><span class="line">&#125;</span><br><span class="line">&lt;h1&gt;武汉科技大学&lt;/h1&gt;</span><br><span class="line">// tips: 在css3中推荐写法为 ::before ::after</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-常用属性"><a href="#2-常用属性" class="headerlink" title="2. 常用属性"></a>2. 常用属性</h3><h4 id="1-背景属性"><a href="#1-背景属性" class="headerlink" title="1. 背景属性"></a>1. 背景属性</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.example</span> &#123;</span><br><span class="line">    // 颜色</span><br><span class="line">    <span class="selector-tag">background-color</span> : <span class="selector-tag">red</span>;</span><br><span class="line">    </span><br><span class="line">    // 图片</span><br><span class="line">    background-image : url(image/1.jpg); // 没有引号</span><br><span class="line">    backgroung-repeat : no-repeat; // 背景图片仅显示一次 </span><br><span class="line">    							   // 默认为 repeat 背景图片将在垂直和水平方向重复</span><br><span class="line">    background-attachment : fixed; // 页面滚动时，背景图不会滚动 </span><br><span class="line">                                   // 默认为scroll 会滚动</span><br><span class="line">    // 上述三种属性可简写为 </span><br><span class="line">    background : url(image/1.jpg) no-repeat fixed;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-字体属性"><a href="#2-字体属性" class="headerlink" title="2. 字体属性"></a>2. 字体属性</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">p</span> &#123;</span><br><span class="line">	<span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line">	font-family: 黑体,arial,sans-serif;   //如果浏览器不支持第一个字体，则会尝试下一个</span><br><span class="line">	font-style: italic; //字体样式 分为 normal italic 斜体 oblique 倾斜 </span><br><span class="line">	font-weight: bold;  //字体粗细</span><br><span class="line">	line-height: 30px;  //行高</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-文本属性"><a href="#3-文本属性" class="headerlink" title="3. 文本属性"></a>3. 文本属性</h4><ol>
+<li>文字居中</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.center</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: silver;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">	<span class="attribute">text-align</span>: center; </span><br><span class="line">&#125;</span><br><span class="line">&lt;div class=&quot;center&quot;&gt;武汉科技大学&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="http://cdn.zhouxug.cn/20201129151930.png" alt="image-20201129151930663"></p>
+<ol start="2">
+<li>文字水平居中</li>
+</ol>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span><span class="selector-class">.center</span> &#123;</span><br><span class="line">	<span class="attribute">background-color</span>: silver;</span><br><span class="line">	<span class="attribute">width</span>:<span class="number">200px</span>;</span><br><span class="line">	<span class="attribute">height</span>: <span class="number">50px</span>; </span><br><span class="line">	<span class="attribute">text-align</span>: center;</span><br><span class="line">	line-height: 50px;  // 字体行高与 div的行高相同 则文字可以垂直居中</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ol start="3">
+<li>图片居中</li>
+</ol>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">img</span> &#123;</span><br><span class="line">	<span class="attribute">border</span>: <span class="number">1px</span> solid blue;</span><br><span class="line">	<span class="attribute">vertical-align</span>: middle;</span><br><span class="line">&#125;</span><br><span class="line">&lt;<span class="selector-tag">p</span>&gt;</span><br><span class="line">	这是一幅&lt;img src=&quot;images/1.gif&quot; /&gt;位于段落中的图像。</span><br><span class="line">&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">首页</a></li>
+         
+          <li><a href="/about/">关于</a></li>
+         
+          <li><a href="/archives/">归档</a></li>
+         
+          <li><a href="/tags/">标签</a></li>
+         
+          <li><a href="/categories/">分类</a></li>
+         
+          <li><a href="/search/">搜索</a></li>
+         
+          <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-%E9%80%89%E6%8B%A9%E5%88%A4%E6%96%AD"><span class="toc-number">1.</span> <span class="toc-text">1. 选择判断</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-HTML"><span class="toc-number">1.0.1.</span> <span class="toc-text">1. HTML</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-CSS"><span class="toc-number">2.</span> <span class="toc-text">2. CSS</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%B8%B8%E7%94%A8%E9%80%89%E6%8B%A9%E5%99%A8"><span class="toc-number">2.0.1.</span> <span class="toc-text">1. 常用选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B8%B8%E7%94%A8%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.</span> <span class="toc-text">2. 常用属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E8%83%8C%E6%99%AF%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.1.</span> <span class="toc-text">1. 背景属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AD%97%E4%BD%93%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.2.</span> <span class="toc-text">2. 字体属性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%96%87%E6%9C%AC%E5%B1%9E%E6%80%A7"><span class="toc-number">2.0.2.3.</span> <span class="toc-text">3. 文本属性</span></a></li></ol></li></ol></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2020/11/29/NET/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2020/11/29/NET/&text=.NET"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2020/11/29/NET/&is_video=false&description=.NET"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=.NET&body=Check out this article: http://example.com/2020/11/29/NET/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2020/11/29/NET/&title=.NET"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2020/11/29/NET/&name=.NET&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2020/11/29/NET/&t=.NET"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020
+    Sinan
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        
+        <li><a href="/">首页</a></li>
+        
+        <li><a href="/about/">关于</a></li>
+        
+        <li><a href="/archives/">归档</a></li>
+        
+        <li><a href="/tags/">标签</a></li>
+        
+        <li><a href="/categories/">分类</a></li>
+        
+        <li><a href="/search/">搜索</a></li>
+        
+        <li><a href="/friends/">友链</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+
+
+</footer>
+    </div>
+    <!-- styles -->
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+<link rel="stylesheet" href="/lib/justified-gallery/css/justifiedGallery.min.css">
+
+
+    <!-- jquery -->
+
+<script src="/lib/jquery/jquery.min.js"></script>
+
+
+<script src="/lib/justified-gallery/js/jquery.justifiedGallery.min.js"></script>
+
+<!-- clipboard -->
+
+  
+<script src="/lib/clipboard/clipboard.min.js"></script>
+
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Disqus Comments -->
+
+
+</body>
+</html>
