@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>3.存储系统</title>
+      <link href="2021/04/20/3-%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/"/>
+      <url>2021/04/20/3-%E5%AD%98%E5%82%A8%E7%B3%BB%E7%BB%9F/</url>
+      
+        <content type="html"><![CDATA[<h1 id="3-1-存储器概述"><a href="#3-1-存储器概述" class="headerlink" title="3.1 存储器概述"></a>3.1 存储器概述</h1><h3 id="3-1-1-存储器分类"><a href="#3-1-1-存储器分类" class="headerlink" title="3.1.1 存储器分类"></a>3.1.1 存储器分类</h3><h4 id="1-作用-层次分类"><a href="#1-作用-层次分类" class="headerlink" title="1. 作用 / 层次分类"></a>1. 作用 / 层次分类</h4><ol><li>主存储器：CPU可直接访问，也可以和Cache以及辅存交换数据</li><li>辅存储器：不能与CPU直接交换数据</li><li>高速缓冲存储器：用于存放正在执行的数据，用于提升存储效率</li></ol><p><strong>注：CPU 与Cache交换数据以字为单位，Cache与主存数据交换以Cache块为单位</strong></p><h4 id="2-存储介质"><a href="#2-存储介质" class="headerlink" title="2. 存储介质"></a>2. 存储介质</h4><ol><li>磁表面：磁盘、磁带、磁心存储器、半导体存储器（MOS，双极型）</li><li>光存储：光盘</li></ol><h4 id="3-存取方式"><a href="#3-存取方式" class="headerlink" title="*3. 存取方式"></a>*3. 存取方式</h4><ol><li><p>随机存储器 / RAM：存储器任何一个存储单元的内容都可以随机存取，且存取时间与存储单元物理位置无关</p></li><li><p>只读存储器 / ROM：广义上的只读存储器已通过电擦除等方式可进行写入，<strong>其“只读”概念没有保留，仅保留断电内容保留、随机读取特性，但写入速度比读取速度慢得多</strong>。</p><ol><li><p>掩模式只读存储器 / MROM：在生产过程中直接写入，以后任何人都无法改变其内容</p></li><li><p>一次可编程只读存储器 / PROM：允许用户用专门设备写入程序，写入后内容就无法改变</p></li><li><p>可擦除可编程只读存储器 / EPROM：可多次改写，修改时先全部擦除，再编程。编程次数有限，写入时间过长</p><ol><li>紫外线擦除(UVEPROM)</li><li>电擦除(EEPROM)</li></ol></li><li><p>闪速存储器(Flash Memory):EPROM和EEPROM(电可擦除可编程存储器)基础上发展而来，<strong>用MOS管上的浮栅有无电荷来存储信息；写入时仍要先擦去原有数据，因此写入速度比读速度满不少。</strong></p><p> <em>u盘</em></p></li><li><p>固态硬盘：由控制单元和<strong>闪存存储器</strong>构成。</p></li></ol><p> <strong>注1： HDD不是ROM，是硬盘，硬盘是磁盘的一种，即直接存取存储器</strong></p><p> <strong>注2：ROM和RAM均是随机存取方式，随机存取方式不一定是随机存取存储器</strong></p></li><li><p>串行访问存储器：读写操作时，按其物理位置下的先后进行寻址</p><ol><li><p>顺序存取存储器：只能按某种顺序存取，存取时间的长短与信息在存储体上的物理位置有关，其特点是存取速度慢。</p><p> <em>磁带</em></p></li><li><p>直接存取存储器 / 半顺序存取存储器：寻找整个存储器中的某个小区域（如磁盘上的磁道），再在小区域内顺序查找。</p><p> <em>磁盘，光盘</em></p></li></ol></li></ol><h4 id="4-信息可保存性："><a href="#4-信息可保存性：" class="headerlink" title="4. 信息可保存性："></a>4. 信息可保存性：</h4><ol><li>断电后存储信息是否消失:易失性(RAM)、非易失性</li><li>读出是否破坏信息:破坏性读出(DRAM)、非破坏性读出</li></ol><h4 id="5-补充：相联存储器"><a href="#5-补充：相联存储器" class="headerlink" title="5. 补充：相联存储器"></a>5. 补充：相联存储器</h4><p>​    把存储单元所存取的内容的某一部分作为检索项 / 关键字去检索该存储器，并将存储器中与该检索项符合的存储单元进行读出和写入，<strong>按内容或地址寻址</strong></p><p>​    <em>TLB快表、相联Cache</em></p><h3 id="3-1-2-性能指标"><a href="#3-1-2-性能指标" class="headerlink" title="3.1.2 性能指标"></a>3.1.2 性能指标</h3><ol><li><p>存储容量:存储字数 * 字长(如1M * 8位)</p></li><li><p>单位成本:每位价格 = 总成本 / 总容量</p></li><li><p>存储速度:数据传输率 = 数据的宽度 / 存储周期</p><ol><li><p>存取时间(Ta)：一次读操作从开始到完成，将数据读出到数据总线上的时间。由于写操作时间 ≈ 读操作时间，故称为存取时间</p></li><li><p>存取周期(Tm):存取周期又称为读写周期或访问周期。它是指存储器进行一次完整的读写操作所需的全部时间,即连续两次独立地访问存储器操作(读或写操作)之间所需的最小时间间隔。</p> <img src="http://cdn.zhouxug.cn/20210420212035.png" alt="image-20210420212035375" style="zoom:67%;" /></li><li><p>主存带宽(Bm):主存带宽又称数据传输率或存储器带宽，表示每秒从主存进出信息的最大数量,单位为字/秒,字节/秒(B/s)或位/秒(b/s)。</p></li></ol></li></ol><h1 id="3-2-存储层次化结构"><a href="#3-2-存储层次化结构" class="headerlink" title="3.2 存储层次化结构"></a>3.2 存储层次化结构</h1><h3 id="1-多级存储器结构"><a href="#1-多级存储器结构" class="headerlink" title="1. 多级存储器结构"></a>1. 多级存储器结构</h3><img src="http://cdn.zhouxug.cn/20210420212648.png" alt="image-20210420212648758" style="zoom:67%;" /><h3 id="2-三级存储器结构"><a href="#2-三级存储器结构" class="headerlink" title="2. 三级存储器结构"></a>2. 三级存储器结构</h3><ol><li><p>Cache-主存层次；硬件实现,解决速度不匹配问题。<strong>主存和Cache间的数据调动全部是由硬件完成，对所有程序员都是透明的</strong></p></li><li><p>主存-辅存层次；硬件+操作系统实现,解决容量问题,逐渐形成虚拟存储系统。<strong>主存和辅存间的数据调动由硬件和操作系统共同完成，对应用程序员透明，系统程序员不透明，页式和段页式则对应用程序员半透明。</strong></p> <img src="http://cdn.zhouxug.cn/20210420213308.png" style="zoom:67%;" /></li></ol><h1 id="3-3-半导体随机存储器"><a href="#3-3-半导体随机存储器" class="headerlink" title="3.3 半导体随机存储器"></a>3.3 半导体随机存储器</h1><blockquote><p>​    把存放一份二进制位的物理器件称为存储元，地址码相同的存储元组成一个存储单元，多个存储单元组成存储体</p></blockquote><h3 id="3-3-1-SRAM-与-DRAM"><a href="#3-3-1-SRAM-与-DRAM" class="headerlink" title="3.3.1 SRAM 与 DRAM"></a>3.3.1 SRAM 与 DRAM</h3><table><thead><tr><th>特点类型</th><th>SRAM</th><th>DRAM</th></tr></thead><tbody><tr><td>存储信息</td><td>触发器</td><td>栅极电容上的电荷</td></tr><tr><td>破坏性读出</td><td>非</td><td>是</td></tr><tr><td>需要刷新</td><td>不要</td><td>需要</td></tr><tr><td>送行列地址</td><td>同时送</td><td>分两次送(地址复用技术)，分行、列两次传送</td></tr><tr><td>运行速度</td><td>快</td><td>慢</td></tr><tr><td>集成度</td><td>低</td><td>高(只有一个晶体管)</td></tr><tr><td>发热量</td><td>大</td><td>小</td></tr><tr><td>存储成本</td><td>高</td><td>低</td></tr><tr><td>常用作</td><td>Cache</td><td>主存</td></tr></tbody></table><h3 id="3-3-2-DRAM的刷新"><a href="#3-3-2-DRAM的刷新" class="headerlink" title="3.3.2 DRAM的刷新"></a>3.3.2 DRAM的刷新</h3><blockquote><p>DRAM电容上的电荷一般只能维持1~2ms，每隔一段时间要刷新，通常取2ms，称为刷新周期。</p></blockquote><ol><li><p>分散刷新 : 每次读写完都刷新一行，存取周期一段用来读写，一段用来刷新，不存在死时间，但是存取周期变长。</p><p> <img src="http://cdn.zhouxug.cn/20210420225609.png" alt="image-20210420225608967"></p></li><li><p>集中刷新  : 2ms内集中安排时间全部刷新，存在一段死时间</p><p> <img src="http://cdn.zhouxug.cn/20210420225619.png" alt="image-20210420225619823"></p></li><li><p>异步刷新 : 2ms内每行刷新一次即可,刷新时间除以行数，每过一小段时间刷新一次，缩短了死时间，但死时间仍然存在。</p></li></ol><p><img src="http://cdn.zhouxug.cn/20210420225732.png" alt="image-20210420225732426"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 408笔记 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 计算机组成原理 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title></title>
       <link href="2021/02/02/nms/"/>
       <url>2021/02/02/nms/</url>
